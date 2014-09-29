@@ -1,2 +1,67 @@
-<h1>Calculator#index</h1>
-<p>Find me in app/views/calculator/index.html.erb</p>
+<h1>The Breeze Calculator</h1>
+<h2>We get you in a hybrid car, hassle-free with no down payment so you can start earning money immediately.</h2>
+<p>Let's get a little more information from you and show you exactly what we mean:</p>
+
+<%= form_tag :action => 'submit', :method => 'post' do %>
+  
+  Where do you live? 
+  <%= select_tag 'city', options_for_select(CalculatorController.all_cities.collect{ |k,v| [v, k] }) %>
+  
+  <br />
+  How many hours are you willing to work a week? 
+  <%= text_field_tag(:hours) %>
+  
+  <br />
+  
+  
+  <%= submit_tag( "Submit" ) %>
+  
+<% end %>
+
+<br />
+<br />
+
+<% if current_city && hours %>
+
+<h1> Living in <%= current_city %> working <%= hours %> hours a week: </h1>
+
+	<h2> Breeze Advantage: </h2>
+	<h3> First Month: </h3>
+	<div>
+		Costs:
+		<p> $0 down payment for your own hybrid car. </p>
+		<p>  $<%= car_lease %> - Breeze car lease</p>
+		<p>  $<%= hybrid_monthly_gas %> - Breeze average gas costs</p>
+		Earnings:
+		<p> $<%= monthly_earnings %> as an Uber driver in <%= current_city %></p>
+	</div>
+	<h3> First Year: </h3>
+	<div>
+		Costs:
+		<p>  $<%= car_lease * 12.to_f %> - Breeze car lease</p>
+		<p>  $<%= hybrid_monthly_gas * 12.to_f %> - Breeze average gas costs</p>
+		Earnings:
+		<p> $<%= monthly_earnings * 12.to_f %> as an Uber driver in <%= current_city %></p>
+	</div>
+	
+	<h2> Doing it on your own: </h2>
+	<h3> First Month: </h3>
+	<div>
+		Costs:
+		<p>  $<%= due_at_signing %> down payment for your own car (*credit check requried). </p>
+		<p>  $<%= car_lease %> - Average car lease</p>
+		<p>  $<%= monthly_gas %> - Average gas costs</p>
+		Earnings:
+		<p> $<%= monthly_earnings %> as an Uber driver in <%= current_city %></p>
+	</div>
+	<h3> First Year: </h3>
+	<div>
+		Costs:
+		<p>  $<%= car_lease * 12.to_f %> - Car lease</p>
+		<p>  $<%= monthly_gas * 12.to_f %> - Average gas costs</p>
+		Earnings:
+		<p> $<%= monthly_earnings * 12.to_f %> as an Uber driver in <%= current_city %></p>
+	</div>
+
+<% end %>
+
